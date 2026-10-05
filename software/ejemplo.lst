@@ -1,0 +1,77 @@
+
+ejemplo.out:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+80000000 <_start>:
+80000000:	08000113          	addi	sp,zero,128
+80000004:	800001b7          	lui	gp,0x80000
+80000008:	0e818193          	addi	gp,gp,232 # 800000e8 <_etext>
+8000000c:	00000213          	addi	tp,zero,0
+80000010:	00400293          	addi	t0,zero,4
+
+80000014 <InicLoop>:
+80000014:	00520c63          	beq	tp,t0,8000002c <Inicbss>
+80000018:	0001a303          	lw	t1,0(gp)
+8000001c:	00622023          	sw	t1,0(tp) # 0 <_start_ram>
+80000020:	00418193          	addi	gp,gp,4
+80000024:	00420213          	addi	tp,tp,4 # 4 <espera>
+80000028:	fedff06f          	jal	zero,80000014 <InicLoop>
+
+8000002c <Inicbss>:
+8000002c:	00400193          	addi	gp,zero,4
+80000030:	00800213          	addi	tp,zero,8
+
+80000034 <Loopbss>:
+80000034:	00418863          	beq	gp,tp,80000044 <JumpMain>
+80000038:	0001a023          	sw	zero,0(gp)
+8000003c:	00418193          	addi	gp,gp,4
+80000040:	ff5ff06f          	jal	zero,80000034 <Loopbss>
+
+80000044 <JumpMain>:
+80000044:	04c0006f          	jal	zero,80000090 <main>
+
+80000048 <desplaza_led>:
+80000048:	ff010113          	addi	sp,sp,-16
+8000004c:	00112623          	sw	ra,12(sp)
+80000050:	00812423          	sw	s0,8(sp)
+80000054:	01010413          	addi	s0,sp,16
+80000058:	00002703          	lw	a4,0(zero) # 0 <_start_ram>
+8000005c:	07f00793          	addi	a5,zero,127
+80000060:	00e7f863          	bgeu	a5,a4,80000070 <desplaza_led+0x28>
+80000064:	00100713          	addi	a4,zero,1
+80000068:	00e02023          	sw	a4,0(zero) # 0 <_start_ram>
+8000006c:	0100006f          	jal	zero,8000007c <desplaza_led+0x34>
+80000070:	00002783          	lw	a5,0(zero) # 0 <_start_ram>
+80000074:	00179713          	slli	a4,a5,0x1
+80000078:	00e02023          	sw	a4,0(zero) # 0 <_start_ram>
+8000007c:	00000013          	addi	zero,zero,0
+80000080:	00c12083          	lw	ra,12(sp)
+80000084:	00812403          	lw	s0,8(sp)
+80000088:	01010113          	addi	sp,sp,16
+8000008c:	00008067          	jalr	zero,0(ra)
+
+80000090 <main>:
+80000090:	fe010113          	addi	sp,sp,-32
+80000094:	00112e23          	sw	ra,28(sp)
+80000098:	00812c23          	sw	s0,24(sp)
+8000009c:	02010413          	addi	s0,sp,32
+800000a0:	000027b7          	lui	a5,0x2
+800000a4:	fef42623          	sw	a5,-20(s0)
+800000a8:	00300713          	addi	a4,zero,3
+800000ac:	00e02223          	sw	a4,4(zero) # 4 <espera>
+800000b0:	00002783          	lw	a5,0(zero) # 0 <_start_ram>
+800000b4:	00078713          	addi	a4,a5,0 # 2000 <_stack_ptr+0x1f80>
+800000b8:	fec42783          	lw	a5,-20(s0)
+800000bc:	00e7a023          	sw	a4,0(a5)
+800000c0:	00402783          	lw	a5,4(zero) # 4 <espera>
+800000c4:	fff78713          	addi	a4,a5,-1
+800000c8:	00e02223          	sw	a4,4(zero) # 4 <espera>
+800000cc:	00402783          	lw	a5,4(zero) # 4 <espera>
+800000d0:	00079863          	bne	a5,zero,800000e0 <main+0x50>
+800000d4:	00300713          	addi	a4,zero,3
+800000d8:	00e02223          	sw	a4,4(zero) # 4 <espera>
+800000dc:	f6dff0ef          	jal	ra,80000048 <desplaza_led>
+800000e0:	10500073          	wfi
+800000e4:	fcdff06f          	jal	zero,800000b0 <main+0x20>

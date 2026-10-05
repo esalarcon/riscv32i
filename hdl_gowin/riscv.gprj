@@ -1,0 +1,30 @@
+<?xml version="1" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="GW1NZ-1" pn="GW1NZ-LV1QN48C6/I5">gw1nz1-015</Device>
+    <FileList>
+        <File path="src/core/addsub.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/alu.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/cmp.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/cnt.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/desplazamientos.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/extendersigno.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/fsm_control.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/genb.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/readbus.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/regs.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/rv32i.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/core/writegen.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/engen.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/genrst.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/memoria_ram.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/micro_ejemplo.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/programa.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/puerto_salida.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/temporizador.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/tang1k.cst" type="file.cst" enable="1"/>
+        <File path="src/tang1k.sdc" type="file.sdc" enable="1"/>
+    </FileList>
+</Project>

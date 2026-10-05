@@ -1,0 +1,21 @@
+// Reloj del oscilador embebido (27 MHz)
+IO_LOC "clk" 47;
+IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// Reset asíncrono en bajo conectado a KEY_A
+IO_LOC "key_a" 13;
+IO_PORT "key_a" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// Pulsador KEY_B
+IO_LOC "key_b" 44;
+IO_PORT "key_b" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// Bus de LEDs RGB (Lógica Activa en Bajo)
+IO_LOC "nled[0]" 9;   // LED Verde
+IO_PORT "nled[0]" IO_TYPE=LVCMOS33 DRIVE=8;
+
+IO_LOC "nled[1]" 10;  // LED Azul
+IO_PORT "nled[1]" IO_TYPE=LVCMOS33 DRIVE=8;
+
+IO_LOC "nled[2]" 11;  // LED Rojo
+IO_PORT "nled[2]" IO_TYPE=LVCMOS33 DRIVE=8;

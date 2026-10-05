@@ -1,0 +1,16 @@
+make
+riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -g -ffreestanding -O0 -nostdlib -nostartfiles -E ejemplo.c -o ejemplo.i
+riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -g -ffreestanding -O0 -nostdlib -nostartfiles -S ejemplo.c -o ejemplo.s
+riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -g -ffreestanding -O0 -nostdlib -nostartfiles -c ejemplo.c -o ejemplo.o
+riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -g -ffreestanding -O0 -nostdlib -nostartfiles -Wl,-T,micro_juan.ld \
+	start_juan.s ejemplo.o \
+	-o ejemplo.out
+riscv64-unknown-elf-objdump -d -M no-aliases \
+	ejemplo.out > ejemplo.lst
+riscv64-unknown-elf-objcopy -O binary \
+	ejemplo.out ejemplo.bin
+python3 generar_rom.py ejemplo.bin > ejemplo.vhd
+riscv64-unknown-elf-size ejemplo.out
+   text	   data	    bss	    dec	    hex	filename
+    232	      4	      4	    240	     f0	ejemplo.out
+
