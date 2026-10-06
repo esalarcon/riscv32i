@@ -1,7 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
---use IEEE.MATH_REAL.ALL;
 
 entity engen is
     Generic(G_FCLK: natural := 40_000_000;
@@ -12,13 +11,21 @@ entity engen is
 end engen;
 
 architecture Behavioral of engen is
-   --constant C_NBITS : natural := integer(ceil(log2(real(G_FCLK/G_FREQ))));
-   constant C_NBITS :  natural := 32;
-   constant C_VAL   :  natural := G_FCLK/G_FREQ-1;
-   signal cnt       :  unsigned(C_NBITS-1 downto 0);
-   signal z         :  std_logic;
+    function ceil_log2(n : natural) return natural is 
+        variable valor      : natural := n;
+        variable resultado  : natural := 0; 
+    begin
+        while valor > 0 loop
+            valor := valor /2;
+            resultado := resultado + 1;
+        end loop;
+        return resultado;
+    end function;
+    constant C_NBITS :  natural := ceil_log2(G_FCLK/G_FREQ);
+    constant C_VAL   :  natural := G_FCLK/G_FREQ-1;
+    signal cnt       :  unsigned(C_NBITS-1 downto 0);
+    signal z         :  std_logic;
 begin
-   
    process(clk)
    begin
       if(rising_edge(clk)) then
